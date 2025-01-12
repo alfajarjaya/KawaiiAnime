@@ -2,17 +2,16 @@ import AnimeList from "../components/AnimeList";
 import Header from "../components/AnimeList/header";
 import CollectionByGenre from "../components/AnimeList/collec-genre";
 import { getAnime, getAnimeResponse, getAnimeResponseResource } from "./api/api";
+import Footer from "../components/footer";
 
 export default async function Page() {
-
-  const topAnime = await getAnime('top/anime', 'limit=12')
-  const collecGenre = await getAnimeResponseResource('genres/anime')
-  let recomenAnime = await getAnimeResponse('recommendations/anime', 'entry')
+  const topAnime = await getAnime("top/anime", "limit=12");
+  const collecGenre = await getAnimeResponseResource("genres/anime");
+  let recomenAnime = await getAnimeResponse("recommendations/anime", "entry");
   recomenAnime = {
-    data: recomenAnime.sort(() => Math.random() - 0.5).slice(0, 12)
-  }
-
-  const topManga = await getAnime('top/manga', 'filter=publishing')
+    data: recomenAnime.sort(() => Math.random() - 0.5).slice(0, 12),
+  };
+  const topManga = await getAnime("top/manga", "filter=publishing");
 
   return (
     <>
@@ -35,7 +34,6 @@ export default async function Page() {
             <Header.LinkAnime linkTitle="View More" linkHref="/anime/rekomendasi" />
           </div>
         </section>
-
         <section>
           <div className="mt-8 mb-3 flex justify-center">
             <Header.TopTitleAnime title="TOP MANGA POPULER" />
@@ -48,6 +46,7 @@ export default async function Page() {
           </div>
         </section>
       </div>
+      <Footer />
     </>
   );
 }

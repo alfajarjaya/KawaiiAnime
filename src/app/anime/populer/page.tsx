@@ -1,17 +1,16 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import HeaderMenu from "@/components/utilities/HeaderMenu";
-import Pagination from "@/components/utilities/Pagination";
-import AnimeList from "@/components/AnimeList";
 import { getAnime } from "../../api/api";
+import HeaderMenu from "../../../components/utilities/HeaderMenu";
+import AnimeList from "../../../components/AnimeList";
+import Pagination from "../../../components/utilities/Pagination";
 
-// Definisi tipe data untuk respons API
 interface Anime {
     mal_id: number;
     title: string;
     image_url: string;
-    [key: string]: any; // Tambahkan properti lain jika diperlukan
+    [key: string]: any; 
 }
 
 interface AnimeResponse {
@@ -19,7 +18,7 @@ interface AnimeResponse {
     pagination?: {
         last_visible_page: number;
         current_page: number;
-        [key: string]: any; // Properti lain jika diperlukan
+        [key: string]: any;
     };
 }
 
@@ -32,7 +31,7 @@ const Page: React.FC = () => {
             const populerAnime: AnimeResponse = await getAnime("top/anime", `page=${page}`);
             setTopAnime(populerAnime);
         } catch (err) {
-            console.error("Failed to fetch data:", err);
+            // pass
         }
     };
 

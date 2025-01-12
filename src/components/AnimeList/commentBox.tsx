@@ -1,5 +1,7 @@
-import prisma from "@/libs/prisma";
+import { PrismaClient } from "@prisma/client";
 import Header from "./header";
+
+const prisma = new PrismaClient()
 
 interface Comment {
     id: number;
@@ -16,7 +18,7 @@ const CommentBox: React.FC<CommentBoxProps> = async ({ anime_mal_id }) => {
     const comments: Comment[] = await prisma.comment.findMany({ where: { anime_mal_id } });
 
     return (
-        <section className="my-8">
+        <section className="my-8 container mx-auto">
             <Header.TopTitleAnime title="Komentar" />
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-6">
                 {comments.map((comment) => (

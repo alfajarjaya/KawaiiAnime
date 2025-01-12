@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Header from "./header";
-import { getAnimeResponseRecource } from "@/app/api/api";
+import { getAnimeResponseResource } from "../../app/api/api";
 
 interface Genre {
     name: string;
@@ -29,8 +29,8 @@ interface GetEpisodeProps {
 }
 
 const GetEpisode: React.FC<GetEpisodeProps> = async ({ id }) => {
-    const getEpisodeAnime: GetEpisodeAnimeResponse = await getAnimeResponseRecource(`anime/${id}/videos/episodes`);
-    const anime: GetAnimeResponse = await getAnimeResponseRecource(`anime/${id}`);
+    const getEpisodeAnime: GetEpisodeAnimeResponse = await getAnimeResponseResource(`anime/${id}/videos/episodes`);
+    const anime: GetAnimeResponse = await getAnimeResponseResource(`anime/${id}`);
 
     return (
         <div className="text-lg text-gray-300 sm:w-2/3">

@@ -1,6 +1,6 @@
-import { authUserSession } from "@/libs/auth-libs";
 import Image from "next/image";
 import Link from "next/link";
+import { authUserSession } from "../../../libs/auth-libs";
 
 type User = {
     image: string;

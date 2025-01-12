@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import HeaderMenu from "@/components/utilities/HeaderMenu";
-import Pagination from "@/components/utilities/Pagination";
-import AnimeList from "@/components/AnimeList";
 import { getAnime } from "../../api/api";
+import HeaderMenu from "../../../components/utilities/HeaderMenu";
+import AnimeList from "../../../components/AnimeList";
+import Pagination from "../../../components/utilities/Pagination";
 
 interface AnimePagination {
     last_visible_page: number;

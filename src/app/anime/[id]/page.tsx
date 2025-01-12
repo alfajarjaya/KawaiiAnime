@@ -1,15 +1,15 @@
-import { getAnime } from "@/app/api/api";
-import CollectionButton from "@/components/AnimeList/collection-button";
-import CommentInput from "@/components/AnimeList/comment-input";
-import CommentBox from "@/components/AnimeList/commentBox";
-import GetEpisode from "@/components/AnimeList/getEpisode";
-import VideoPlayer from "@/components/utilities/videoPlayer";
-import { authUserSession } from "@/libs/auth-libs";
-import prisma from "@/libs/prisma";
 import Image from "next/image";
-import Link from "next/link";
+import { getAnime } from "../../api/api";
+import { authUserSession } from "../../../libs/auth-libs";
+import CollectionButton from "../../../components/AnimeList/collection-button";
+import GetEpisode from "../../../components/AnimeList/getEpisode";
+import CommentInput from "../../../components/AnimeList/comment-input";
+import CommentBox from "../../../components/AnimeList/commentBox";
+import VideoPlayer from "../../../components/utilities/videoPlayer";
+import { PrismaClient } from "@prisma/client";
 
-// Tipe data untuk API response anime
+const prisma = new PrismaClient();
+
 interface AnimeData {
     title: string;
     year: number;
@@ -18,38 +18,30 @@ interface AnimeData {
     popularity: number;
     synopsis: string;
     images: {
-        webp: {
-            image_url: string;
-        };
-        jpg: {
-            image_url: string;
-        };
+        webp: { image_url: string };
+        jpg: { image_url: string };
     };
-    trailer: {
-        youtube_id: string | null;
-    };
+    trailer: { youtube_id: string | null };
 }
 
 interface AnimeResponse {
     data: AnimeData;
 }
 
-// Tipe data untuk user session
 interface UserSession {
     email: string;
     name: string;
 }
 
-// Tipe data untuk parameter halaman
 interface PageParams {
-    params: {
-        id: string;
-    };
+    params: { id: string };
 }
 
 const Page = async ({ params: { id } }: PageParams) => {
     const anime: AnimeResponse = await getAnime(`anime/${id}`);
     const user: UserSession | null = await authUserSession();
+
+    // Pastikan Prisma diinisialisasi dengan benar
     const collection = await prisma.collection.findFirst({
         where: { user_email: user?.email, anime_mal_id: id },
     });

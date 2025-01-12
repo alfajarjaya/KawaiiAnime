@@ -1,15 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
+import Footer from "../footer";
 
 interface Anime {
     mal_id: number;
     title: string;
     images: {
+        jpg: {
+            image_url: string;
+        },
         webp: {
             image_url: string;
         };
     };
-    url?: string; // Untuk MangaListPages
+    url?: string;
 }
 
 interface ApiResponse {
@@ -42,7 +46,7 @@ const AnimeListHome: React.FC<AnimeListProps> = ({ api }) => {
                                 {anime.title.length > 30 ? anime.title.slice(0, 20) + "..." : anime.title}
                             </h3>
                             <Image
-                                src={anime.images.webp.image_url}
+                                src={anime.images?.jpg.image_url}
                                 alt={anime.title}
                                 width={150}
                                 height={150}
@@ -57,20 +61,21 @@ const AnimeListHome: React.FC<AnimeListProps> = ({ api }) => {
 };
 
 const AnimeListPages: React.FC<AnimeListProps> = ({ api }) => {
+    const data = Object.values(api || []);
     return (
         <section>
             <div className="grid md:grid-cols-6 sm:grid-cols-3 grid-cols-2 gap-4">
-                {api.data?.map((anime, index) => (
+                {data.map((anime, index) => (
                     <div key={index} className="shadow-lg cursor-pointer">
                         <Link href={`/anime/${anime.mal_id}`} className="text-white hover:text-yellow-300">
                             <Image
-                                src={anime.images.webp.image_url}
-                                alt={anime.title}
+                                src={anime.images?.jpg?.image_url}
+                                alt={anime.title || "No title available"}
                                 width={250}
                                 height={250}
                                 className="rounded-md img"
                             />
-                            <h3 className="font-bold md:text-l text-md p-4">{anime.title}</h3>
+                            <h3 className="font-bold md:text-l text-md p-4">{anime.title || "Untitled"}</h3>
                         </Link>
                     </div>
                 ))}
@@ -87,7 +92,7 @@ const MangaListPages: React.FC<AnimeListProps> = ({ api }) => {
                     <div key={index} className="shadow-lg cursor-pointer">
                         <Link href={anime.url || "#"} className="text-white hover:text-yellow-300">
                             <Image
-                                src={anime.images.webp.image_url}
+                                src={anime.images?.jpg.image_url}
                                 alt={anime.title}
                                 width={250}
                                 height={250}

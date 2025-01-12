@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import HeaderMenu from "@/components/utilities/HeaderMenu";
-import Pagination from "@/components/utilities/Pagination";
-import AnimeList from "@/components/AnimeList";
-import { getAnimeResponseResource } from "@/app/api/api";
+import { getAnimeResponseResource } from "../../api/api";
+import HeaderMenu from "../../../components/utilities/HeaderMenu";
+import AnimeList from "../../../components/AnimeList";
+import Pagination from "../../../components/utilities/Pagination";
+import Footer from "../../../components/footer";
 
-// Definisi tipe data untuk rekomendasi anime
 interface AnimeEntry {
     mal_id: number;
     title: string;
@@ -24,18 +24,17 @@ interface RecommendationResponse {
 }
 
 const Page: React.FC = () => {
-    const [page, setPage] = useState < number > (1);
-    const [recommendAnime, setRecommendAnime] = useState < AnimeEntry[] > ([]);
-    const [lastPage, setLastPage] = useState < number | null > (null);
+    const [page, setPage] = useState<number>(1);
+    const [recommendAnime, setRecommendAnime] = useState<AnimeEntry[]>([]);
+    const [lastPage, setLastPage] = useState<number | null>(null);
 
     const fetchData = async () => {
         try {
-            const recomAnime: RecommendationResponse = await getAnimeResponseResource < RecommendationResponse > (
+            const recomAnime: RecommendationResponse = await getAnimeResponseResource<RecommendationResponse>(
                 `recommendations/anime`
             );
 
-            // Meratakan data rekomendasi anime
-            const randomizedAnime = recomAnime.data.flatMap((item) => item.entry);
+            const randomizedAnime = recomAnime.data?.flatMap((item) => item.entry);
 
             setRecommendAnime(randomizedAnime || []);
             setLastPage(recomAnime.pagination?.last_visible_page ?? 1);
@@ -49,15 +48,17 @@ const Page: React.FC = () => {
     }, [page]);
 
     return (
-        <div className="container mx-auto px-4 h-dvh">
-            <HeaderMenu
-                title="Recommended"
-                page={`Page ${page}`}
-                desc="Discover your favorite content"
-            />
-            <AnimeList.AnimeListPages api={recommendAnime} />
-            <Pagination page={page} lastPage={lastPage} setPage={setPage} />
-        </div>
+        <>
+            <div className="container mx-auto px-4 h-dvh">
+                <HeaderMenu
+                    title="Recommended"
+                    page={`Page ${page}`}
+                    desc="Discover your favorite content"
+                />
+                <AnimeList.AnimeListPages api={recommendAnime} />
+                <Pagination page={page} lastPage={lastPage} setPage={setPage} />
+            </div>
+        </>
     );
 };
 

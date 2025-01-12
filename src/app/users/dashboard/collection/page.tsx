@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import Header from "@/components/dashboard/header";
-import { authUserSession } from "@/libs/auth-libs";
-import prisma from "@/libs/prisma";
+import prisma from "../../../../libs/prisma";
+import { authUserSession } from "../../../../libs/auth-libs";
+import Header from "../../../../components/dashboard/header";
 
 // Tipe untuk data pengguna
 type User = {

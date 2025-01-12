@@ -1,6 +1,6 @@
-import AnimeList from "@/components/AnimeList";
-import Header from "@/components/AnimeList/header";
-import { getAnime } from "@/app/api/api";
+import AnimeList from "../../../components/AnimeList";
+import Header from "../../../components/AnimeList/header";
+import { getAnime } from "../../api/api";
 
 interface PageProps {
     params: {
@@ -19,17 +19,17 @@ export default async function Page({ params }: PageProps) {
             <section className="container mx-auto">
                 <div className="flex justify-center items-center mb-10">
                     <div className="text-center flex justify-center items-center custom-bg">
-                        <Header.topTitleAnime title={`Pencarian untuk ${decodeKeyword}...`} />
+                        <Header.TopTitleAnime title={`Pencarian untuk ${decodeKeyword}...`} />
                     </div>
                 </div>
                 <div>
-                    <Header.topTitleAnime title="Kategori Anime" />
+                    <Header.TopTitleAnime title="Kategori Anime" />
                     <div className="my-8">
-                        <AnimeList.AnimeListPages api={searchAnime} />
+                        <AnimeList.MangaListPages api={searchAnime} />
                     </div>
                 </div>
                 <div>
-                    <Header.topTitleAnime title="Kategori Manga" />
+                    <Header.TopTitleAnime title="Kategori Manga" />
                     <div className="my-8">
                         <AnimeList.MangaListPages api={searchManga} />
                     </div>

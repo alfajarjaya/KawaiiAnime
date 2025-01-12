@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { List, X } from "@phosphor-icons/react";
+import { List, ArrowArcLeft } from "@phosphor-icons/react";
 import Link from "next/link";
+import { DiscordLogo } from "@phosphor-icons/react/dist/ssr";
 
 const ButtonNavbar: React.FC = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -38,31 +39,41 @@ const ButtonNavbar: React.FC = () => {
             >
                 <button
                     onClick={toggleMenu}
-                    className="absolute top-4 right-4 hover:text-white cursor-pointer"
+                    className="absolute top-4 left-10 hover:text-white cursor-pointer flex items-center justify-start gap-x-3"
                 >
-                    <X size={32} />
+                    <ArrowArcLeft size={32} /> Close menu
                 </button>
 
                 <nav className="mt-20">
                     <ul className="space-y-4">
                         <li>
-                            <Link href="#" className="block px-4 py-2 hover:bg-gray-700 rounded hover:bg-opacity-50">
+                            <Link href="/" className="block mx-4 py-2 flex items-center justify-center gap-x-5 text-center bg-blue-800 bg-opacity-70 hover:bg-gray-700 rounded-full hover:bg-opacity-50">
+                                <DiscordLogo size={20} />Community
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href="/" className="block p-4 hover:bg-gray-700 hover:bg-opacity-50 border-b-[1px] border-gray-500">
                                 Home
                             </Link>
                         </li>
                         <li>
-                            <Link href="#" className="block px-4 py-2 hover:bg-gray-700 rounded hover:bg-opacity-50">
-                                About
+                            <Link href="/anime/populer" className="block p-4 hover:bg-gray-700 hover:bg-opacity-50 border-b-[1px] border-gray-500">
+                                Most Popular
                             </Link>
                         </li>
                         <li>
-                            <Link href="#" className="block px-4 py-2 hover:bg-gray-700 rounded hover:bg-opacity-50">
-                                Services
+                            <Link href="/anime/rekomendasi" className="block p-4 hover:bg-gray-700 hover:bg-opacity-50 border-b-[1px] border-gray-500">
+                                Recommendations
                             </Link>
                         </li>
                         <li>
-                            <Link href="#" className="block px-4 py-2 hover:bg-gray-700 rounded hover:bg-opacity-50">
-                                Contact
+                            <Link href="/manga/populer" className="block p-4 hover:bg-gray-700 hover:bg-opacity-50 border-b-[1px] border-gray-500">
+                                Manga
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href="/characters" className="block p-4 hover:bg-gray-700 hover:bg-opacity-50 border-b-[1px] border-gray-500">
+                                Character
                             </Link>
                         </li>
                     </ul>
