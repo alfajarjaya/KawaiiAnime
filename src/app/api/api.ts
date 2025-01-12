@@ -43,3 +43,12 @@ export const getCharacterAnime = async <T = any>(resource: string, query: string
     }
     return response.json();
 };
+
+export const getPictureById = async (resource: string, id: string, objectProperty: string): Promise<string> => {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/${resource}/${id}/${objectProperty}`);
+    if (!response.ok) {
+        throw new Error(`Error fetching data: ${response.statusText}`);
+    }
+    const data = await response.json();
+    return data
+};

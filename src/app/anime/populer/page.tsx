@@ -23,8 +23,8 @@ interface AnimeResponse {
 }
 
 const Page: React.FC = () => {
-    const [page, setPage] = useState < number > (1);
-    const [topAnime, setTopAnime] = useState < AnimeResponse | null > (null);
+    const [page, setPage] = useState <number> (1);
+    const [topAnime, setTopAnime] = useState <AnimeResponse | null> (null);
 
     const fetchData = async () => {
         try {

@@ -1,4 +1,5 @@
 import React from "react";
+import { ArrowLeft, ArrowRight } from '@mui/icons-material';
 
 interface PaginationProps {
     page: number;
@@ -24,18 +25,28 @@ const Pagination: React.FC<PaginationProps> = ({ page, lastPage, setPage }) => {
     };
 
     return (
-        <div className="flex justify-center items-center py-8 px-2 gap-4 text-xl">
+        <div className="flex justify-center items-center py-8 px-4 gap-4 text-lg">
             {page > 1 && (
-                <button className="transition-all hover:text-blue-400" onClick={handlePrevPage}>
+                <button
+                    className="flex items-center gap-2 px-4 py-2 rounded-lg shadow hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
+                    onClick={handlePrevPage}
+                >
+                    <ArrowLeft className="text-blue-500" />
                     Prev
                 </button>
             )}
-            <p>
-                {page} of {lastPage}
+
+            <p className="font-semibold text-gray-700">
+                Page <span className="text-blue-500">{page}</span> of <span className="text-blue-500">{lastPage}</span>
             </p>
+
             {page < lastPage && (
-                <button className="transition-all hover:text-blue-400" onClick={handleNextPage}>
+                <button
+                    className="flex items-center gap-2 px-4 py-2 rounded-lg shadow hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all"
+                    onClick={handleNextPage}
+                >
                     Next
+                    <ArrowRight className="text-blue-500" />
                 </button>
             )}
         </div>

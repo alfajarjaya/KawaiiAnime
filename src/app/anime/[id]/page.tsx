@@ -40,8 +40,6 @@ interface PageParams {
 const Page = async ({ params: { id } }: PageParams) => {
     const anime: AnimeResponse = await getAnime(`anime/${id}`);
     const user: UserSession | null = await authUserSession();
-
-    // Pastikan Prisma diinisialisasi dengan benar
     const collection = await prisma.collection.findFirst({
         where: { user_email: user?.email, anime_mal_id: id },
     });
